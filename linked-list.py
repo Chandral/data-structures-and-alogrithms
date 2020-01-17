@@ -16,18 +16,40 @@ class LinkedList(object):
         self.size = 0
 
     def add_link(self, link):
-        if self.head:
-            current_link = self.head
-            while current_link.next_node:
-                current_link = current_link.next_node
-            current_link.next_node = link
+        if isinstance(link, Link):
+            if self.head:
+                current_link = self.head
+                while current_link.next_node:
+                    current_link = current_link.next_node
+                current_link.next_node = link
+            else:
+                self.head = link
+            self.size += 1
         else:
-            self.head = link
+            print("Please provide a Link object")
+
+    def insert_link_at(self, position):
+        try:
+            position = int(position)
+        except ValueError:
+            print("Please provide an integer")
 
     def remove_link_at(self, position):
-        pass
+        try:
+            position = int(position)
+        except ValueError:
+            print("Please provide an integer")
 
     def get_data_at(self, position):
+        try:
+            position = int(position)
+        except ValueError:
+            print("Please provide an integer")
+
+    def remove_link_with_data(self, data):
+        pass
+
+    def remove_all_links_with_data(self, data):
         pass
 
 
@@ -38,3 +60,5 @@ n3 = Link(3)
 ll.add_link(n1)
 ll.add_link(n2)
 ll.add_link(n3)
+ll.add_link("asdfasd")
+
