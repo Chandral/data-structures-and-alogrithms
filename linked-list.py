@@ -33,10 +33,12 @@ class LinkedList(object):
             try:
                 position = int(position)
                 if 0 < position <= self.size:
-                    preceding_node = self.head
-                    for pos in range(0, position-1):
-                        preceding_node = preceding_node.next_node
-                    print(preceding_node.data)
+                    preceding_link = self.head
+                    for pos in range(0, position-2):
+                        preceding_link = preceding_link.next_node
+                    link.next_node = preceding_link.next_node
+                    preceding_link.next_node = link
+                    self.size += 1
                 else:
                     print("No existing link at this position. Try add_link() method")
             except ValueError:
@@ -48,10 +50,10 @@ class LinkedList(object):
         try:
             position = int(position)
             if 0 < position <= self.size:
-                preceding_node = self.head
+                current_node = self.head
                 for pos in range(0, position - 1):
-                    preceding_node = preceding_node.next_node
-                print(preceding_node.data)
+                    current_node = current_node.next_node
+                print(current_node.data)
             else:
                 print("No link found at this position to remove")
         except ValueError:
@@ -61,10 +63,10 @@ class LinkedList(object):
         try:
             position = int(position)
             if 0 < position <= self.size:
-                preceding_node = self.head
+                current_node = self.head
                 for pos in range(0, position - 1):
-                    preceding_node = preceding_node.next_node
-                return preceding_node.data
+                    current_node = current_node.next_node
+                return current_node.data
             return "No link found at this position"
         except ValueError:
             print("Please provide an integer")
@@ -82,8 +84,23 @@ n2 = Link(2)
 n3 = Link(3)
 n4 = Link(4)
 
+
 ll.add_link(n1)
 ll.add_link(n2)
 ll.add_link(n3)
+ll.add_link(n4)
+
+print(ll.head.data)
+print(ll.head.next_node.data)
+print(ll.head.next_node.next_node.data)
+print(ll.head.next_node.next_node.next_node.data)
+
+print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
 
 ll.insert_link_at(3, n4)
+
+print(ll.head.data)
+print(ll.head.next_node.data)
+print(ll.head.next_node.next_node.data)
+print(ll.head.next_node.next_node.next_node.data)
+print(ll.head.next_node.next_node.next_node.next_node.data)
