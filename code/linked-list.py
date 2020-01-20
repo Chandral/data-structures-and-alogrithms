@@ -51,9 +51,12 @@ class LinkedList(object):
             position = int(position)
             if 0 < position <= self.size:
                 current_node = self.head
-                for pos in range(0, position - 1):
+                for pos in range(0, position - 2):
                     current_node = current_node.next_node
-                print(current_node.data)
+                delete_node = current_node.next_node
+                replace_node = delete_node.next_node
+                current_node.next_node = replace_node
+                del delete_node
             else:
                 print("No link found at this position to remove")
         except ValueError:
@@ -78,29 +81,20 @@ class LinkedList(object):
         pass
 
 
+nodes = [Link(1), Link(2), Link(3), Link(4)]
 ll = LinkedList()
-n1 = Link(1)
-n2 = Link(2)
-n3 = Link(3)
-n4 = Link(4)
-
-
-ll.add_link(n1)
-ll.add_link(n2)
-ll.add_link(n3)
-ll.add_link(n4)
-
-print(ll.head.data)
-print(ll.head.next_node.data)
-print(ll.head.next_node.next_node.data)
-print(ll.head.next_node.next_node.next_node.data)
-
-print("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~")
-
-ll.insert_link_at(3, n4)
-
-print(ll.head.data)
-print(ll.head.next_node.data)
-print(ll.head.next_node.next_node.data)
-print(ll.head.next_node.next_node.next_node.data)
-print(ll.head.next_node.next_node.next_node.next_node.data)
+[ll.add_link(n) for n in nodes]
+def show():
+    node = ll.head
+    series = ""
+    while node:
+        series += str(node.data)
+        node = node.next_node
+    print(series)
+show()
+ll.insert_link_at(3, Link(4))
+show()
+ll.remove_link_at(4)
+ll.remove_link_at(4)
+show()
+print(ll.get_data_at(2))
