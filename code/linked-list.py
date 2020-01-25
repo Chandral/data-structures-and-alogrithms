@@ -3,16 +3,10 @@ class Link(object):
         self.data = data
         self.next_node = None
 
-    def get_data(self):
-        return self.data
-
-    def change_data(self, new_data):
-        self.data = new_data
-
 
 class LinkedList(object):
     def __init__(self):
-        self.head = None
+        self._head = None
         self.size = 0
 
     def add_link(self, link):
@@ -83,18 +77,22 @@ class LinkedList(object):
 
 nodes = [Link(1), Link(2), Link(3), Link(4)]
 ll = LinkedList()
-[ll.add_link(n) for n in nodes]
-def show():
-    node = ll.head
-    series = ""
-    while node:
-        series += str(node.data)
-        node = node.next_node
-    print(series)
-show()
-ll.insert_link_at(3, Link(4))
-show()
-ll.remove_link_at(4)
-ll.remove_link_at(4)
-show()
-print(ll.get_data_at(2))
+ll.head = "asdfas"
+print(ll._head)
+print(ll.head)
+
+# [ll.add_link(n) for n in nodes]
+#
+#
+# def show():
+#     node = ll.head
+#     series = ""
+#     while node:
+#         series += str(node.data)
+#         node = node.next_node
+#     print(series)
+#
+#
+# show()
+# ll.remove_link_at(4)
+# show()
