@@ -1,59 +1,43 @@
 import inspect
-"""
- @property decorator
- @link.setter
- inspect module
- hasattr function
- __repr__ function
-"""
+
 
 class Link:
-
-    def __init__(self, value=None, link=None):
-        self.value = value
-        self._link = link
+    def __init__(self, data):
+        self.data = data
+        self._next_link = None
 
     @property
-    def link(self):
-        return self._link
+    def next_link(self):
+        return self._next_link
 
-    @link.setter
-    def link(self, value):
+    @next_link.setter
+    def next_link(self, link):
         caller = inspect.stack()[1].function
         if hasattr(LinkedList, caller):
-            self._link = value
+            self._next_link = link
         else:
             raise AttributeError("Can't set value of link from class Link")
 
 
 class LinkedList:
-
     def __init__(self):
         self.head = None
-    def append_link(self, value):
+
+    def append_link(self, link):
         if not self.head:
-            self.head = Link(value)
+            self.head = Link(link)
         else:
-            t = self.head
-            while t.link != None:
-                t = t.link
-            t.link = Link(value)
-    def __repr__(self):
-        t = self.head
-        list_values = []
-        while t != None:
-            list_values.append(str(t.value))
-            t = t.link
-        return f'[{", ".join(list_values)}]'
+            tail = self.head
+            while tail.next_link:
+                tail = tail.next_link
+            tail.next_link = Link(link)
 
 
 ll = LinkedList()
-print(ll)
 ll.append_link(10)
 ll.append_link(20)
 ll.append_link(30)
 ll.append_link(40)
-print(ll)
-
-l = Link()
-l.link = 'value'
+print(ll.head.next_link.next_link.next_link.next_link)
+ll.head.next_link.next_link.next_link.next_link = Link(2)
+print(ll.head.next_link.next_link.next_link.next_link)
