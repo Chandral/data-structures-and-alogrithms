@@ -24,18 +24,35 @@ class LinkedList:
         self.head = None
         self.size = 0
 
-    def append_link(self, link):
+    def append_link(self, link_data):
         if not self.head:
-            self.head = Link(link)
+            self.head = Link(link_data)
         else:
             tail = self.head
             while tail.next_link:
                 tail = tail.next_link
-            tail.next_link = Link(link)
+            tail.next_link = Link(link_data)
         self.size += 1
 
-    def insert_link_at(self, position):
-        pass
+    def insert_link_at(self, position, link_data):
+        try:
+            position = int(position)
+            if 0 < position <= self.size:
+                if position == 1:
+                    temp = self.head
+                    self.head = Link(link_data)
+                    self.head.next_link = temp
+                else:
+                    preceding_link = self.head
+                    for _ in range(1, position-1):
+                        preceding_link = preceding_link.next_link
+                    new_link = Link(link_data)
+                    new_link.next_link = preceding_link.next_link
+                    preceding_link.next_link = new_link
+            else:
+                print("No existing link at position: {}. Try appending it.".format(position))
+        except ValueError:
+            print("Please provide an integer")
 
     def delete_link_at(self, position):
         pass
@@ -58,11 +75,23 @@ class LinkedList:
     def get_positions_of(self, data):
         pass
 
+
 ll = LinkedList()
-ll.append_link(10)
-ll.append_link(20)
-ll.append_link(30)
-ll.append_link(40)
-print(ll.head.next_link.next_link.next_link.next_link)
-ll.head.next_link.next_link.next_link.next_link = Link(2)
-print(ll.head.next_link.next_link.next_link.next_link)
+ll.append_link(1)
+ll.append_link(2)
+ll.append_link(3)
+ll.append_link(4)
+
+
+def show():
+    L = ll.head
+    s = ""
+    while L:
+        s += str(L.data)
+        L = L.next_link
+    print(s)
+
+show()
+
+ll.insert_link_at(4, 6)
+show()
