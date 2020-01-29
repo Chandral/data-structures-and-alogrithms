@@ -22,6 +22,7 @@ class Link:
 class LinkedList:
     def __init__(self):
         self.head = None
+        self.size = 0
 
     def append_link(self, link):
         if not self.head:
@@ -31,7 +32,31 @@ class LinkedList:
             while tail.next_link:
                 tail = tail.next_link
             tail.next_link = Link(link)
+        self.size += 1
 
+    def insert_link_at(self, position):
+        pass
+
+    def delete_link_at(self, position):
+        pass
+
+    def break_link_at(self, position):
+        pass
+
+    def read_data_at(self, position):
+        pass
+
+    def delete_link_with_data(self):
+        pass
+
+    def delete_links_with_data(self):
+        pass
+
+    def count_instances_of(self, data):
+        pass
+
+    def get_positions_of(self, data):
+        pass
 
 ll = LinkedList()
 ll.append_link(10)
