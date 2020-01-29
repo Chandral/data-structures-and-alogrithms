@@ -1,5 +1,11 @@
 import inspect
-
+"""
+ @property decorator
+ @link.setter
+ inspect module
+ hasattr function
+ __repr__ function
+"""
 
 class Link:
 
