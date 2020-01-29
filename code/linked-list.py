@@ -1,98 +1,104 @@
-class Link(object):
+import inspect
+
+
+class Link:
     def __init__(self, data):
         self.data = data
-        self.next_node = None
+        self._next_link = None
+
+    @property
+    def next_link(self):
+        return self._next_link
+
+    @next_link.setter
+    def next_link(self, link):
+        caller = inspect.stack()[1].function
+        if hasattr(LinkedList, caller):
+            self._next_link = link
+        else:
+            raise AttributeError("Can't set value of link from class Link")
 
 
-class LinkedList(object):
+class LinkedList:
     def __init__(self):
-        self._head = None
+        self.head = None
         self.size = 0
 
-    def add_link(self, link):
-        if isinstance(link, Link):
-            if self.head:
-                current_link = self.head
-                while current_link.next_node:
-                    current_link = current_link.next_node
-                current_link.next_node = link
-            else:
-                self.head = link
-            self.size += 1
+    def append_link(self, link_data):
+        if not self.head:
+            self.head = Link(link_data)
         else:
-            print("Please provide a Link object")
+            tail = self.head
+            while tail.next_link:
+                tail = tail.next_link
+            tail.next_link = Link(link_data)
+        self.size += 1
 
-    def insert_link_at(self, position, link):
-        if isinstance(link, Link):
-            try:
-                position = int(position)
-                if 0 < position <= self.size:
-                    preceding_link = self.head
-                    for pos in range(0, position-2):
-                        preceding_link = preceding_link.next_node
-                    link.next_node = preceding_link.next_node
-                    preceding_link.next_node = link
-                    self.size += 1
+    def insert_link_at(self, position, link_data):
+        try:
+            position = int(position)
+            if 0 < position <= self.size:
+                if position == 1:
+                    temp = self.head
+                    self.head = Link(link_data)
+                    self.head.next_link = temp
                 else:
-                    print("No existing link at this position. Try add_link() method")
-            except ValueError:
-                print("Please provide an integer")
-        else:
-            print("Please provide a Link object")
-
-    def remove_link_at(self, position):
-        try:
-            position = int(position)
-            if 0 < position <= self.size:
-                current_node = self.head
-                for pos in range(0, position - 2):
-                    current_node = current_node.next_node
-                delete_node = current_node.next_node
-                replace_node = delete_node.next_node
-                current_node.next_node = replace_node
-                del delete_node
+                    preceding_link = self.head
+                    for _ in range(1, position-1):
+                        preceding_link = preceding_link.next_link
+                    new_link = Link(link_data)
+                    new_link.next_link = preceding_link.next_link
+                    preceding_link.next_link = new_link
             else:
-                print("No link found at this position to remove")
+                print("No existing link at position: {}. Try appending it.".format(position))
         except ValueError:
             print("Please provide an integer")
 
-    def get_data_at(self, position):
+    def delete_link_at(self, position):
         try:
             position = int(position)
             if 0 < position <= self.size:
-                current_node = self.head
-                for pos in range(0, position - 1):
-                    current_node = current_node.next_node
-                return current_node.data
-            return "No link found at this position"
+                pass
+            else:
+                print("No link found at position: {}".format(position))
         except ValueError:
             print("Please provide an integer")
 
-    def remove_link_with_data(self, data):
+    def break_link_at(self, position):
         pass
 
-    def remove_all_links_with_data(self, data):
+    def read_data_at(self, position):
+        pass
+
+    def delete_link_with_data(self):
+        pass
+
+    def delete_links_with_data(self):
+        pass
+
+    def count_instances_of(self, data):
+        pass
+
+    def get_positions_of(self, data):
         pass
 
 
-nodes = [Link(1), Link(2), Link(3), Link(4)]
 ll = LinkedList()
-ll.head = "asdfas"
-print(ll._head)
-print(ll.head)
+ll.append_link(1)
+ll.append_link(2)
+ll.append_link(3)
+ll.append_link(4)
 
-# [ll.add_link(n) for n in nodes]
-#
-#
-# def show():
-#     node = ll.head
-#     series = ""
-#     while node:
-#         series += str(node.data)
-#         node = node.next_node
-#     print(series)
-#
-#
-# show()
-# ll.remove_link_at(4)
-# show()
+
+def show():
+    L = ll.head
+    s = ""
+    while L:
+        s += str(L.data)
+        L = L.next_link
+    print(s)
+
+show()
+
+ll.insert_link_at(4, 6)
+show()
