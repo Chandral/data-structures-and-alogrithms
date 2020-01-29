@@ -49,6 +49,7 @@ class LinkedList:
                     new_link = Link(link_data)
                     new_link.next_link = preceding_link.next_link
                     preceding_link.next_link = new_link
+                self.size += 1
             else:
                 print("No existing link at position: {}. Try appending it.".format(position))
         except ValueError:
@@ -58,17 +59,48 @@ class LinkedList:
         try:
             position = int(position)
             if 0 < position <= self.size:
-                pass
+                if position == 1:
+                    if self.head.next_link:
+                        self.head = self.head.next_link
+                    else:
+                        self.head = None
+                else:
+                    preceding_link = self.head
+                    for _ in range(1, position - 1):
+                        preceding_link = preceding_link.next_link
+                    preceding_link.next_link = preceding_link.next_link.next_link
+                self.size -= 1
             else:
                 print("No link found at position: {}".format(position))
         except ValueError:
             print("Please provide an integer")
 
     def break_link_at(self, position):
-        pass
+        try:
+            position = int(position)
+            if 0 < position <= self.size:
+                link = self.head
+                for _ in range(1, position):
+                    link = link.next_link
+                link.next_link = None
+                self.size = position
+            else:
+                print("No link found at position: {}".format(position))
+        except ValueError:
+            print("Please provide an integer")
 
     def read_data_at(self, position):
-        pass
+        try:
+            position = int(position)
+            if 0 < position <= self.size:
+                link = self.head
+                for _ in range(1, position):
+                    link = link.next_link
+                return link.data
+            else:
+                print("No link found at position: {}".format(position))
+        except ValueError:
+            print("Please provide an integer")
 
     def delete_link_with_data(self):
         pass
@@ -89,7 +121,6 @@ ll.append_link(2)
 ll.append_link(3)
 ll.append_link(4)
 
-
 def show():
     L = ll.head
     s = ""
@@ -98,7 +129,4 @@ def show():
         L = L.next_link
     print(s)
 
-show()
-
-ll.insert_link_at(4, 6)
 show()
