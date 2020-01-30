@@ -102,24 +102,50 @@ class LinkedList:
         except ValueError:
             print("Please provide an integer")
 
-    def delete_link_with_data(self):
-        pass
+    def count_instances_of(self, link_data):
+        num_of_links = 0
+        link = self.head
+        while link:
+            if link.data == link_data:
+                num_of_links += 1
+            link = link.next_link
+        return num_of_links
 
-    def delete_links_with_data(self):
-        pass
+    def delete_link_with_data(self, link_data):
+        link = self.head
+        position = 1
+        found = False
+        while link:
+            if link.data == link_data:
+                found = True
+                break
+            link = link.next_link
+            position += 1
+        if found:
+            self.delete_link_at(position)
 
-    def count_instances_of(self, data):
-        pass
+    def delete_links_with_data(self, link_data):
+        count = self.count_instances_of(link_data)
+        if count > 0:
+            for _ in range(0, count):
+                self.delete_link_with_data(link_data)
 
-    def get_positions_of(self, data):
-        pass
+    def get_positions_of(self, link_data):
+        positions = []
+        link = self.head
+        p = 1
+        while link:
+            if link.data == link_data:
+                positions.append(p)
+            link = link.next_link
+            p += 1
+        if positions:
+            return positions
+        return link_data, "Not found"
 
 
 ll = LinkedList()
-ll.append_link(1)
-ll.append_link(2)
-ll.append_link(3)
-ll.append_link(4)
+[ll.append_link(i) for i in ("A", "A", "A", "B", "C", "C", "D")]
 
 def show():
     L = ll.head
@@ -130,3 +156,6 @@ def show():
     print(s)
 
 show()
+ll.delete_links_with_data("D")
+show()
+print(ll.get_positions_of("D"))
