@@ -1,10 +1,7 @@
-def get_fib(position):
-    if position == 0 or position == 1:
-        return position
-    return get_fib(position - 1) + get_fib(position - 2)
+def get_val(num, limit):
+    if num > limit:
+        return num
+    return get_val(num + 1, limit)
 
 
-print(get_fib(9))
-print(get_fib(11))
-print(get_fib(0))
-print(get_fib(1))
+print(get_val(1, 50))
