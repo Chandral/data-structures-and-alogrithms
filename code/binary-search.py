@@ -16,29 +16,20 @@ def binary_search(input_array, value):
     start = 0
     end = len(input_array)
     midpoint = int(((end-start)/2) + start)
-    first = True
-    while start != end:
-        if end-start == 1 and first:
-            first = False
-        elif end-start == 1:
-            end = start
-        print(start, end)
+    while end != midpoint:
         mid_val = input_array[midpoint]
         if value < mid_val:
             end = midpoint
             midpoint = int(((end - start) / 2) + start)
         elif value > mid_val:
-            start = midpoint
+            start = midpoint+1
             midpoint = int(((end - start) / 2) + start)
         elif value == mid_val:
             return midpoint
-        input()
     return -1
 
 
 test_list = [1, 3, 9, 11, 15, 19, 29]
-test_val2 = 25
-test_val1 = 15
-print(binary_search(test_list, test_val1))
-print("~" * 25)
-print(binary_search(test_list, test_val2))
+print([binary_search(test_list, i) for i in test_list])
+print(binary_search(test_list, -1))
+print(binary_search(test_list, 30))
