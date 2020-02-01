@@ -143,19 +143,17 @@ class LinkedList:
             return positions
         return link_data, "Not found"
 
+    def __repr__(self):
+        current_link = self.head
+        result = ""
+        while current_link:
+            result += str(current_link.data)
+            current_link = current_link.next_link
+        return result
+
 
 ll = LinkedList()
-[ll.append_link(i) for i in ("A", "A", "A", "B", "C", "C", "D")]
-
-def show():
-    L = ll.head
-    s = ""
-    while L:
-        s += str(L.data)
-        L = L.next_link
-    print(s)
-
-show()
-ll.delete_links_with_data("D")
-show()
-print(ll.get_positions_of("D"))
+[ll.append_link(i) for i in ("A", "C", "A", "B", "C", "C", "D")]
+print(ll)
+ll.delete_links_with_data("C")
+print(ll)

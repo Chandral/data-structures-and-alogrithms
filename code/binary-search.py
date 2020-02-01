@@ -14,22 +14,25 @@ doesn't exist in the list."""
 def binary_search(input_array, value):
     """Your code goes here."""
     start = 0
-    end = len(input_array) - 1
+    end = len(input_array)
+    midpoint = int(((end-start)/2) + start)
     first = True
     while start != end:
-        if end - start == 1 and first:
+        if end-start == 1 and first:
             first = False
         elif end-start == 1:
             end = start
-        dividing = end - start
-        half_way = int(dividing/2)
-        mid_point = start + half_way
-        if value == input_array[mid_point]:
-            return mid_point
-        elif value < input_array[mid_point]:
-            end = mid_point
-        elif value > input_array[mid_point]:
-            start = mid_point
+        print(start, end)
+        mid_val = input_array[midpoint]
+        if value < mid_val:
+            end = midpoint
+            midpoint = int(((end - start) / 2) + start)
+        elif value > mid_val:
+            start = midpoint
+            midpoint = int(((end - start) / 2) + start)
+        elif value == mid_val:
+            return midpoint
+        input()
     return -1
 
 
