@@ -17,6 +17,7 @@ def binary_search(input_array, value):
     end = len(input_array)
     midpoint = int(((end-start)/2) + start)
     while end != midpoint:
+        print("~")
         mid_val = input_array[midpoint]
         if value < mid_val:
             end = midpoint
@@ -30,6 +31,7 @@ def binary_search(input_array, value):
 
 
 test_list = [1, 3, 9, 11, 15, 19, 29]
-print([binary_search(test_list, i) for i in test_list])
-print(binary_search(test_list, -1))
-print(binary_search(test_list, 30))
+# print([binary_search(test_list, i) for i in test_list])
+# print(binary_search(test_list, -1))
+# print(binary_search(test_list, 30))
+print(binary_search(test_list, 1))
