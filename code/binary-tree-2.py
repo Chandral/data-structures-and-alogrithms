@@ -37,6 +37,7 @@ class BST(object):
                 return self.search_helper(node.left, val)
         return False
 
+
 # Set up tree
 tree = BST(4)
 
