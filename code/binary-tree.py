@@ -22,7 +22,7 @@ class BinaryTree(object):
         return self.preorder_print(self.root, "")[:-1]
 
     def preorder_search(self, start, find_val):
-        """Helper method - use this to create a
+        """helper method - use this to create a
         recursive search solution."""
         if start:
             if start.value == find_val:
@@ -32,7 +32,7 @@ class BinaryTree(object):
         return False
 
     def preorder_print(self, start, traversal):
-        """Helper method - use this to create a
+        """helper method - use this to create a
         recursive print solution."""
         if start:
             traversal += str(start.value) + '-'
