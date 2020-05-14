@@ -10,32 +10,37 @@ class BST(object):
         self.root = Node(root)
 
     def insert(self, new_val):
-        self.insertion(self.root, new_val)
+        current_parent_node = self.root
+        while True:
+            if current_parent_node.value > new_val:
+                if current_parent_node.left:
+                    current_parent_node = current_parent_node.left
+                else:
+                    current_parent_node.left = Node(new_val)
+                    break
+            elif current_parent_node.value < new_val:
+                if current_parent_node.right:
+                    current_parent_node = current_parent_node.right
+                else:
+                    current_parent_node.right = Node(new_val)
+                    break
 
     def search(self, find_val):
-        return self.search_helper(self.root, find_val)
-
-    def insertion(self, node, val):
-        if node.value < val:
-            if node.right:
-                return self.insertion(node.right, val)
+        current_parent_node = self.root
+        while True:
+            if current_parent_node.value == find_val:
+                return True
             else:
-                node.right = Node(val)
-        else:
-            if node.left:
-                return self.insertion(node.left, val)
-            else:
-                node.left = Node(val)
-
-    def search_helper(self, node, val):
-        if node.value == val:
-            return True
-        else:
-            if node.right:
-                return self.search_helper(node.right, val)
-            if node.left:
-                return self.search_helper(node.left, val)
-        return False
+                if current_parent_node.value > find_val:
+                    if current_parent_node.left:
+                        current_parent_node = current_parent_node.left
+                    else:
+                        return False
+                elif current_parent_node.value < find_val:
+                    if current_parent_node.right:
+                        current_parent_node = current_parent_node.right
+                    else:
+                        return False
 
 
 # Set up tree
